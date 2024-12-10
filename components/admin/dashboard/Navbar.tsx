@@ -8,22 +8,18 @@ import styles from "@/app/css-modules/dashboard/navbar/dashboard.navbar.module.c
 import { usePathname } from "next/navigation";
 import { CircleUserRound, Moon, Sun } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
-import { LogOut, Settings, User } from "lucide-react";
+import { LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import logo from "@/public/logo.png";
-import logoblack from "@/public/logo.png";
 import { useTheme } from "next-themes";
-import { IoCarSportOutline } from "react-icons/io5";
-import { IoMdAdd } from "react-icons/io";
 import {
   Select,
   SelectContent,
@@ -32,13 +28,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  TbMailQuestion,
   TbShoppingCartPlus,
   TbShoppingCartSearch,
-  TbUserEdit,
 } from "react-icons/tb";
-import { BsShop } from "react-icons/bs";
-import { FaUsers } from "react-icons/fa";
+import { Separator } from "@/components/ui/separator";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -128,13 +121,10 @@ export default function Navbar() {
                     <Image className="w-36" src={logoblack} alt="Logo" />
                   )}
                 </div> */}
-              <div className="">
-                {theme === "dark" && (
-                  <Image className="w-20" src={logo} alt="Logo" />
-                )}
-                {theme === "light" && (
-                  <Image className="w-20" src={logoblack} alt="Logo" />
-                )}
+              <div className="flex items-center w-fit ">
+                <Image className="w-20" src={logo} alt="Logo" />
+                <Separator orientation="vertical" className="mx-5 " style={{ width: '1px', height: '40px' }} />
+                <span className="text-lg font-light">Panel de administración</span>
               </div>
               {/* <Image className="w-36" src={logo} alt="Logo" /> */}
             </Link>
@@ -263,9 +253,8 @@ export default function Navbar() {
       {/* Mobile menu */}
       <div
         style={{ transform: "translateY(63px)", zIndex: "9999999" }}
-        className={`fixed  inset-0 z-50 md:hidden transition-opacity duration-300 ease-in-out ${
-          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed  inset-0 z-50 md:hidden transition-opacity duration-300 ease-in-out ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
       >
         <div
           className="absolute inset-0 bg-black bg-opacity-65 "
@@ -273,9 +262,8 @@ export default function Navbar() {
         ></div>
 
         <div
-          className={`absolute top-0 pt-2 right-0 w-64 h-full bg-white border-b border-gray-200 dark:bg-background dark:border-border bg-opacity-90 shadow-lg transform transition-transform duration-300 pb-4 ease-in-out flex flex-col justify-between ${
-            isOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+          className={`absolute top-0 pt-2 right-0 w-64 h-full bg-white border-b border-gray-200 dark:bg-background dark:border-border bg-opacity-90 shadow-lg transform transition-transform duration-300 pb-4 ease-in-out flex flex-col justify-between ${isOpen ? "translate-x-0" : "translate-x-full"
+            }`}
           style={{ height: "calc(100vh - 62px)" }}
         >
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">

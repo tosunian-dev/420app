@@ -6,7 +6,7 @@ import ProductModel from "@/app/models/product";
 export async function GET(request: NextRequest, context: any) {
   await connectDB();
   try {
-    const products = await ProductModel.find();
+    const products = await ProductModel.find().sort({updatedAt: -1});
     return NextResponse.json(products);
   } catch (error) {
     return NextResponse.json({ msg: "ERROR_GET_PRODUCTS" });

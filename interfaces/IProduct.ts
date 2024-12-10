@@ -1,6 +1,6 @@
-import { DataTableItem } from "@/app/admin/dashboard/stock/data-table";
 
-export interface IProduct extends DataTableItem{
+
+export interface IProduct {
   _id: string;
   precioDeLista: number;
   precioAlPublico: number;

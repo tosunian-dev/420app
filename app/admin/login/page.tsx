@@ -4,9 +4,7 @@ import logo from "@/public/logo.png";
 import React from "react";
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "Iniciar sesión | Panel de administración",
-  description:
-    "Distrito Automotor, concesionaria de vehículos ubicada en Mar del Plata, Buenos Aires",
+  title: "420 Constitución | Iniciar sesión"
 };
 
 const Login = () => {

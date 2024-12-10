@@ -6,8 +6,7 @@ import SessionWrapper from "@/components/SessionWrapper";
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Concesionaria | Inicio",
-  description: "Encuentra el auto de tus sueños al mejor precio.",
+  title: "420 Constitución | Panel de administración",
 };
 
 export default function RootLayout({

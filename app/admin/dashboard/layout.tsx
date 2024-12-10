@@ -1,23 +1,11 @@
 "use client";
-import { IoMdAdd } from "react-icons/io";
-import { useTheme } from "next-themes";
 import Link from "next/link";
 import {
-  TbHomeCog,
-  TbMailQuestion,
-  TbShoppingCartFilled,
-  TbShoppingCartPlus,
   TbShoppingCartSearch,
-  TbUserEdit,
 } from "react-icons/tb";
-import { IoCarSportOutline } from "react-icons/io5";
 import React, { useEffect, useState } from "react";
 import Navbar from "@/components/admin/dashboard/Navbar";
-import Nav from "@/components/admin/dashboard/Nav";
-import { BsShop } from "react-icons/bs";
-import { FaUsers } from "react-icons/fa";
 import { useSession } from "next-auth/react";
-import { MdOutlineShoppingBag } from "react-icons/md";
 import { Separator } from "@/components/ui/separator";
 
 export default function DashboardLayout({
@@ -61,7 +49,8 @@ export default function DashboardLayout({
                       <span className="ml-3 ">Mis productos</span>
                     </Link>
                   </li>
-                  <Separator className=""/>
+                  <Separator className="" />
+                  {/* 
                   <li>
                     <Link
                       href={"/admin/dashboard/stock/add"}
@@ -70,7 +59,7 @@ export default function DashboardLayout({
                       <TbShoppingCartPlus size={20} />
                       <span className="ml-3 ">Agregar producto</span>
                     </Link>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>
@@ -85,7 +74,7 @@ export default function DashboardLayout({
           className="relative w-full h-full overflow-x-hidden overflow-y-hidden bg-white border-l border-gray-200 dark:bg-background dark:border-border lg:ml-64"
         >
           <main>
-            <div className="px-4 pt-4 sm:pt-6">
+            <div className="p-6 sm:p-10">
               <div className="w-full min-h-[calc(100vh-230px)]">
                 <div className="bg-white dark:bg-background">
                   {children}
