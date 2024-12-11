@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const Login = () => {
   return (
     <>
-      <div className="loginBgPattern">
+      <div className="">
         <div className="flex justify-center w-full h-fit">
           <Image alt="as" src={logo} className="mx-auto mt-6" width={100} />
         </div>
