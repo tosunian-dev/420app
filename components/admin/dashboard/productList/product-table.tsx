@@ -28,6 +28,7 @@ import { Label } from "@/components/ui/label";
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -48,21 +49,25 @@ import { IProduct } from "@/interfaces/IProduct";
 import { useToast } from "@/hooks/use-toast";
 import { IoIosAlert, IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Settings2 } from "lucide-react";
+import { CrossIcon, Settings2 } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { TableSmall, TableSmallBody, TableSmallCaption, TableSmallCell, TableSmallHead, TableSmallHeader, TableSmallRow } from "@/components/ui/tablesmall";
+import { CgPlayListRemove } from "react-icons/cg";
 
 interface ProductTableProps {
   data: IProduct[];
   onEdit: (product: IProduct) => void;
   onDelete: (product: IProduct) => void;
   onModifyPrices: () => void;
-
+  onCopyPrice: () => void;
 }
 
-export function ProductTable({ data, onEdit, onDelete, onModifyPrices }: ProductTableProps) {
+export function ProductTable({ data, onEdit, onDelete, onModifyPrices, onCopyPrice }: ProductTableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
-  const columns = ProductTableColumns({ onEdit, onDelete });
+  const columns = ProductTableColumns({ onEdit, onDelete, onCopyPrice });
   const [openModifyPricesDialog, setOpenModifyPricesDialog] = useState(false);
   const [percent, setPercent] = useState<string | null>(null);
   const [addOrSub, setAddOrSub] = useState<string>("");
@@ -212,7 +217,7 @@ export function ProductTable({ data, onEdit, onDelete, onModifyPrices }: Product
   return (
     <>
       <div>
-        <div className="flex items-center justify-between w-full pt-1 pb-3">
+        <div className="flex items-center justify-between w-full gap-3 pt-1 pb-3">
           <Input
             placeholder="🔎︎  Buscar producto, marca o categoría..."
             value={globalFilter ?? ""}
@@ -221,27 +226,11 @@ export function ProductTable({ data, onEdit, onDelete, onModifyPrices }: Product
           />
 
           <div className="flex items-center gap-4">
-            {/* boton modificar precios */}
-            {itemsSelected.length > 0 && (
-              <Button
-                variant="default"
-                onClick={() => setOpenModifyPricesDialog(!openModifyPricesDialog)}
-                className="flex gap-2 px-3 py-2 w-fit h-fit"
-              >
-                <TbPencilDollar size={21.5} className="w-fit h-fit" />
-                <span>Modificar precios</span>
-              </Button>
-            )}
-            {/* boton modificar precios */}
-
-
-
-
             {/* boton config columnas */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="flex gap-3 p-3 ml-auto text-sm">
-                  <Settings2 size={17} />
+                <Button variant="outline" className="flex gap-3 px-2 ml-auto text-xs 2xl:p-3 2xl:text-sm ">
+                  <Settings2 size={15} />
                   Columnas
                 </Button>
               </DropdownMenuTrigger>
@@ -270,7 +259,6 @@ export function ProductTable({ data, onEdit, onDelete, onModifyPrices }: Product
               </DropdownMenuContent>
             </DropdownMenu>
             {/* boton config columnas */}
-
           </div>
 
         </div>
@@ -322,14 +310,16 @@ export function ProductTable({ data, onEdit, onDelete, onModifyPrices }: Product
             </TableBody>
           </Table>
         </div>
-        <div className="flex flex-col items-center justify-end w-full gap-12 py-4 mx-auto md:flex-row sm:justify-between">
+
+        {/* desktop chart footer  */}
+        <div className="flex-col items-center justify-end hidden w-full gap-8 py-4 mx-auto md:flex md:flex-row sm:justify-between">
           <div className="flex-1 text-sm text-muted-foreground unselectable">
-            {table.getFilteredSelectedRowModel().rows.length} de{" "}
-            {table.getFilteredRowModel().rows.length} productos seleccionados.
+            {table.getSelectedRowModel().rows.length} de{" "}
+            {data.length} productos seleccionados.
           </div>
           {/* selector cantidad de productos por pagina */}
           <div className="flex flex-row items-center gap-2 text-sm">
-            <span className="unselectable">Productos por página</span>
+            <span className="text-sm unselectable">Productos por página</span>
             <Select value={table.getState().pagination.pageSize.toString()}
               onValueChange={(value) => {
                 table.setPageSize(Number(value));
@@ -353,10 +343,8 @@ export function ProductTable({ data, onEdit, onDelete, onModifyPrices }: Product
           </div>
           {/* selector cantidad de productos por pagina */}
 
-          <div>
-            <span className="text-sm font-bold unselectable">Página {currentPage} de {totalPages}</span>
-          </div>
-          <div className="flex gap-2 w-fit">
+
+          <div className="flex items-center gap-4 w-fit">
             <Button
               variant="outline"
               size="icon"
@@ -366,6 +354,9 @@ export function ProductTable({ data, onEdit, onDelete, onModifyPrices }: Product
             >
               <IoIosArrowBack size={14} />
             </Button>
+            <div>
+              <span className="text-sm font-semibold unselectable">Página {currentPage} de {totalPages}</span>
+            </div>
             <Button
               variant="outline"
               size="icon"
@@ -377,7 +368,141 @@ export function ProductTable({ data, onEdit, onDelete, onModifyPrices }: Product
             </Button>
           </div>
         </div>
+        {/* desktop chart footer  */}
+
+        {/* mobile chart footer  */}
+        <div className="flex flex-col items-center justify-end w-full gap-2 py-4 mx-auto md:hidden md:flex-row sm:justify-between">
+          <div className="flex-1 text-sm text-muted-foreground unselectable">
+            {table.getSelectedRowModel().rows.length} de{" "}
+            {data.length} productos seleccionados.
+          </div>
+
+          <div className="flex items-center justify-between w-full my-2 h-fit">
+            {/* selector cantidad de productos por pagina */}
+            <div className="flex flex-row items-center justify-center gap-2 mt-0 text-sm w-fit">
+              <span className="text-sm unselectable">Mostrar</span>
+              <Select value={table.getState().pagination.pageSize.toString()}
+                onValueChange={(value) => {
+                  table.setPageSize(Number(value));
+                }}>
+                <SelectTrigger className="w-16 py-1 pl-3 pr-2 text-sm h-9">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Cantidad</SelectLabel>
+                    <SelectItem value="5">5</SelectItem>
+                    <SelectItem value="10">10</SelectItem>
+                    <SelectItem value="15">15</SelectItem>
+                    <SelectItem value="20">20</SelectItem>
+                    <SelectItem value="30">30</SelectItem>
+                    <SelectItem value="40">40</SelectItem>
+                    <SelectItem value="50">50</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+            {/* selector cantidad de productos por pagina */}
+
+            {/* controles y datos paginacion */}
+            <div className="flex items-center gap-3 ">
+              <Button
+                variant="outline"
+                size="icon"
+                className="p-1 text-sm font-light h-9 w-9"
+                onClick={() => table.previousPage()}
+                disabled={!table.getCanPreviousPage()}
+              >
+                <IoIosArrowBack size={14} />
+              </Button>
+              <span className="text-sm font-semibold unselectable">Página {currentPage} de {totalPages}</span>
+              <Button
+                variant="outline"
+                size="icon"
+                className="p-1 text-sm font-light h-9 w-9"
+                onClick={() => table.nextPage()}
+                disabled={!table.getCanNextPage()}
+              >
+                <IoIosArrowForward size={14} />
+              </Button>
+            </div>
+            {/* controles y datos paginacion */}
+
+          </div>
+
+
+
+        </div>
+        {/* mobile chart footer  */}
+
       </div>
+
+      {itemsSelected.length > 0 && (<>
+        <Separator className="block my-4 md:hidden" />
+        <Card style={{
+          //background: '#000000a8',
+          backdropFilter: 'blur(6px)'
+        }} className="flex flex-col gap-2 p-4 mt-8 sm:fixed right-5 bottom-5">
+          <div className="h-fit">
+            <h5 className="font-bold">{table.getSelectedRowModel().rows.length} productos seleccionados</h5>
+          </div>
+
+          <TableSmall className="z-50" style={{ maxHeight: '40vh' }}>
+            {/* <TableSmallCaption>{table.getSelectedRowModel().rows.length} productos seleccionados.</TableSmallCaption> */}
+            <TableSmallHeader>
+              <TableSmallRow>
+                <TableSmallHead className="text-left w-fit">Producto</TableSmallHead>
+                <TableSmallHead className="text-left w-fit">Precio de lista</TableSmallHead>
+                <TableSmallHead className="text-left w-fit">Precio al público</TableSmallHead>
+              </TableSmallRow>
+            </TableSmallHeader>
+            <TableSmallBody className="overflow-y-scroll">
+              {itemsSelected.map((product) => (
+                <TableSmallRow key={product._id}>
+                  <TableSmallCell className="font-medium">{product.nombre}</TableSmallCell>
+                  <TableSmallCell>{new Intl.NumberFormat("es-AR", {
+                    style: "currency",
+                    currency: "ARS",
+                  }).format(product.precioDeLista)} </TableSmallCell>
+                  <TableSmallCell> {new Intl.NumberFormat("es-AR", {
+                    style: "currency",
+                    currency: "ARS",
+                  }).format(product.precioAlPublico)} </TableSmallCell>
+                </TableSmallRow>
+              ))}
+            </TableSmallBody>
+
+          </TableSmall>
+
+
+
+          {/* boton modificar precios */}
+          {itemsSelected.length > 0 && (
+            <div className="flex flex-col justify-end w-full gap-3 md:flex-row">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  //setItemsSelected([])
+                  table.toggleAllRowsSelected(false)
+                }}
+                className="flex w-full gap-2 px-3 py-2 mt-2 sm:w-fit h-fit"
+              >
+                <CgPlayListRemove size={18} className="w-fit h-fit" />
+                <span>Quitar selección</span>
+              </Button>
+              <Button
+                variant="default"
+                onClick={() => setOpenModifyPricesDialog(!openModifyPricesDialog)}
+                className="flex w-full gap-2 px-3 py-2 mt-2 sm:w-fit h-fit"
+              >
+                <TbPencilDollar size={18} className="w-fit h-fit" />
+                <span>Modificar precios</span>
+              </Button>
+            </div>
+          )}
+          {/* boton modificar precios */}
+        </Card>
+      </>)}
 
       {/* modal modificar precios */}
       <Dialog

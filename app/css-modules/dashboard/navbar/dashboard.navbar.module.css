@@ -1,5 +1,6 @@
 .navCont {
-  padding: 0 2%;
+  padding-left: 70px;
+  padding-right: 55px;
   position: fixed;
   width: 100vw;
 }

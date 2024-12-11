@@ -15,11 +15,13 @@ import { IProduct } from "@/interfaces/IProduct";
 interface ProductTableColumnsProps {
   onEdit: (product: IProduct) => void;
   onDelete: (product: IProduct) => void;
+  onCopyPrice: () => void;
 }
 
 export const ProductTableColumns = ({
   onEdit,
-  onDelete
+  onDelete,
+  onCopyPrice
 }: ProductTableColumnsProps): ColumnDef<IProduct>[] => [
     {
       id: "select",
@@ -52,20 +54,6 @@ export const ProductTableColumns = ({
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Producto
-            <ArrowUpDown size={14} className="ml-2 " />
-          </span>
-        );
-      },
-    },
-    {
-      accessorKey: "categoria",
-      header: ({ column }) => {
-        return (
-          <span
-            className="flex items-center p-0 cursor-pointer hover:text-white "
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Categoría
             <ArrowUpDown size={14} className="ml-2 " />
           </span>
         );
@@ -118,6 +106,20 @@ export const ProductTableColumns = ({
       },
     },
     {
+      accessorKey: "categoria",
+      header: ({ column }) => {
+        return (
+          <span
+            className="flex items-center p-0 cursor-pointer hover:text-white "
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Categoría
+            <ArrowUpDown size={14} className="ml-2 " />
+          </span>
+        );
+      },
+    },
+    {
       id: "actions",
       enableHiding: false,
       cell: ({ row }) => {
@@ -133,8 +135,10 @@ export const ProductTableColumns = ({
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem
-                onClick={() =>
+                onClick={() => {
+                  onCopyPrice();
                   navigator.clipboard.writeText(product.precioAlPublico.toString())
+                }
                 }
               >
                 Copiar precio al público

@@ -32,6 +32,7 @@ import {
   TbShoppingCartSearch,
 } from "react-icons/tb";
 import { Separator } from "@/components/ui/separator";
+import { FaListCheck } from "react-icons/fa6";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -93,7 +94,7 @@ export default function Navbar() {
   return (
     <nav
       style={{ zIndex: "1000000" }}
-      className={`bg-white border-b z-50 border-gray-200 dark:bg-background dark:border-border ${styles.navCont}`}
+      className={`bg-white border-b z-50 border-gray-200 dark:bg-background dark:border-border ${styles.navCont} block lg:hidden`}
     >
       <div className="mx-auto ">
         <div className="flex items-center justify-between h-16">
@@ -123,8 +124,8 @@ export default function Navbar() {
                 </div> */}
               <div className="flex items-center w-fit ">
                 <Image className="w-20" src={logo} alt="Logo" />
-                <Separator orientation="vertical" className="mx-5 " style={{ width: '1px', height: '40px' }} />
-                <span className="text-lg font-light">Panel de administración</span>
+                <Separator orientation="vertical" className="hidden mr-9 lg:block" style={{ width: '1px', height: '40px', marginLeft: '74px' }} />
+                <span className="hidden text-base font-semibold lg:block">Panel de administración</span>
               </div>
               {/* <Image className="w-36" src={logo} alt="Logo" /> */}
             </Link>
@@ -266,33 +267,40 @@ export default function Navbar() {
             }`}
           style={{ height: "calc(100vh - 62px)" }}
         >
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link
-              href="/admin/dashboard/stock"
-              className="flex items-center gap-1 px-3 py-3 text-sm font-medium transition-colors duration-300 rounded-md backgroundOrangHover"
-              onClick={() => setIsOpen(false)}
-            >
-              <TbShoppingCartSearch />
-              <span className="ml-3 ">Mis productos</span>
-            </Link>
-            <Link
-              href="/admin/dashboard/stock/add"
-              className="flex items-center gap-1 px-3 py-3 text-sm font-medium transition-colors duration-300 rounded-md backgroundOrangHover"
-              onClick={() => setIsOpen(false)}
-            >
-              <TbShoppingCartPlus />
-              <span className="ml-3 ">Agregar producto</span>
-            </Link>
+          <div className="px-2 pt-2 pb-3 space-y-4 sm:px-3">
+            <div className="flex flex-col gap-2">
+              <span className="ml-2 text-xs font-semibold text-gray-400">Productos</span>
+              <Link
+                href={"/admin/dashboard/stock"}
+                className={`${pathname === '/admin/dashboard/stock' ? 'dark:bg-white dark:text-black bg-black text-white' : 'text-black dark:bg-background dark:text-white'} flex items-center p-2 text-base font-normal  rounded-lg hover:text-white dark:hover:text-black hover:bg-black dark:hover:bg-gray-100  group`}
+              >
+                <TbShoppingCartSearch size={19} />
+                <span className="ml-2 text-sm">Todos los productos</span>
+              </Link>
+            </div>
 
-            <div
-              className="flex items-center gap-1 px-3 py-3 text-sm font-medium transition-colors duration-300 rounded-md backgroundOrangHover"
-              onClick={() => {
-                setIsOpen(false);
-                signOut();
-              }}
-            >
-              <LogOut className="w-4 h-4 mr-2" />
-              <span>Cerrar sesión</span>
+            <div className="flex flex-col gap-2">
+              <span className="ml-2 text-xs font-semibold text-gray-400">Esquejes</span>
+              <Link
+                href={"/admin/dashboard/stock"}
+                className="flex items-center p-2 text-base font-normal text-black rounded-lg hover:text-white dark:text-white dark:hover:text-black hover:bg-black dark:hover:bg-gray-100 dark:bg-background group"
+              >
+                <FaListCheck size={16} />
+                <span className="ml-3 text-sm">Mis pedidos</span>
+              </Link>
+            </div>
+            <div className="flex flex-col gap-2">
+              <span className="ml-2 text-xs font-semibold text-gray-400">Mi cuenta</span>
+              <div
+                className="flex items-center gap-1 px-3 py-3 text-sm font-medium transition-colors duration-300 rounded-md backgroundOrangHover"
+                onClick={() => {
+                  setIsOpen(false);
+                  signOut();
+                }}
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                <span>Cerrar sesión</span>
+              </div>
             </div>
             {/* 
             <DropdownMenu>

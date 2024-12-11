@@ -7,7 +7,16 @@ import { IProduct } from "@/interfaces/IProduct";
 import { ProductTable } from "@/components/admin/dashboard/productList/product-table";
 import { ProductDialog } from "@/components/admin/dashboard/productList/product-dialog";
 import { ProductDeleteDialog } from "@/components/admin/dashboard/productList/product-delete-dialog";
+import Link from "next/link"
 
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
 const ProductsPage = () => {
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
@@ -43,9 +52,6 @@ const ProductsPage = () => {
     setOpenDialog(false);
     setOpenDeleteDialog(false);
     setLoading(true);
-    console.log(values);
-    console.log('isEditing', isEditing)
-    console.log('isDeleting', isDeleting)
 
     const url = isEditing || isDeleting ? `/api/products/${values._id}` : "/api/products";
     const method = isDeleting ? "DELETE" : isEditing ? "PUT" : "POST";
@@ -59,7 +65,6 @@ const ProductsPage = () => {
         body: JSON.stringify(values),
       });
       const respon = await response.json()
-      console.log('respuesta', respon);
 
       if (!response.ok) {
         throw new Error("Failed to submit product");
@@ -101,7 +106,6 @@ const ProductsPage = () => {
     setOpenDeleteDialog(true);
   };
 
-
   useEffect(() => {
     getProducts();
   }, []);
@@ -114,17 +118,45 @@ const ProductsPage = () => {
     setOpenDeleteDialog(false); setDeletingProduct(null)
   }
 
+  function handleCopyPrice() {
+    toast({
+      description: 'Precio copiado al portapapeles',
+      variant: "default",
+    });
+  }
+
   return (
     <>
-      <div className="flex items-start justify-between mb-6 ">
-        <h2 className="text-xl font-bold md:text-3xl">Mis productos</h2>
+      <div className="flex items-start justify-between mb-4 ">
+        <div className="flex flex-col gap-2">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink className="text-xs">
+                  <Link href="/admin/dashboard/stock">Inicio</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink className="text-xs">
+                  <Link className="text-xs" href="/admin/dashboard/stock">Productos</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage className="text-xs">Todos los productos</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+          <h2 className="text-xl font-semibold md:text-xl 2xl:text-2xl">Todos los productos</h2>
+        </div>
         <Button
           variant="default"
           onClick={() => setOpenDialog(true)}
-          className="flex gap-2 p-2 w-fit h-fit"
+          className="flex gap-2 p-2 my-auto w-fit h-fit"
         >
-          <IoMdAdd size={20} className="w-fit h-fit" />
-          <span>Crear producto</span>
+          <IoMdAdd size={18} className="w-fit h-fit" />
+          <span className="hidden text-xs 2xl:text-sm sm:block">Crear producto</span>
         </Button>
       </div>
       {/* <Separator className="my-5" /> */}
@@ -137,7 +169,7 @@ const ProductsPage = () => {
           <div className="loader"></div>
         </div>
       ) : (
-        <ProductTable data={allProducts} onModifyPrices={() => getProducts()} onEdit={handleEditProduct} onDelete={handleDeleteProduct} />
+        <ProductTable data={allProducts} onModifyPrices={() => getProducts()} onEdit={handleEditProduct} onDelete={handleDeleteProduct} onCopyPrice={() => handleCopyPrice()} />
       )}
 
       <ProductDialog

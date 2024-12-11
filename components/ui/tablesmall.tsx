@@ -2,41 +2,42 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-const Table = React.forwardRef<
+const TableSmall = React.forwardRef<
   HTMLTableElement,
   React.HTMLAttributes<HTMLTableElement>
 >(({ className, ...props }, ref) => (
   <div className="relative w-full overflow-auto">
     <table
       ref={ref}
-      className={cn("w-full caption-bottom 2xl:text-sm text-xs", className)}
+      className={cn("w-full caption-bottom text-xs", className)}
       {...props}
     />
   </div>
 ))
-Table.displayName = "Table"
+TableSmall.displayName = "Table"
 
-const TableHeader = React.forwardRef<
+const TableSmallHeader = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
   <thead ref={ref} className={cn("[&_tr]:border-b", className)} {...props} />
 ))
-TableHeader.displayName = "TableHeader"
+TableSmallHeader.displayName = "TableSmallHeader"
 
-const TableBody = React.forwardRef<
+const TableSmallBody = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
   <tbody
     ref={ref}
-    className={cn("[&_tr:last-child]:border-0", className)}
+    className={cn("[&_tr:last-child]:border-0 overflow-y-scroll" , className)}
+    style={{ maxHeight: '200px' }}
     {...props}
   />
 ))
-TableBody.displayName = "TableBody"
+TableSmallBody.displayName = "TableSmallBody"
 
-const TableFooter = React.forwardRef<
+const TableSmallFooter = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
@@ -49,9 +50,9 @@ const TableFooter = React.forwardRef<
     {...props}
   />
 ))
-TableFooter.displayName = "TableFooter"
+TableSmallFooter.displayName = "TableSmallFooter"
 
-const TableRow = React.forwardRef<
+const TableSmallRow = React.forwardRef<
   HTMLTableRowElement,
   React.HTMLAttributes<HTMLTableRowElement>
 >(({ className, ...props }, ref) => (
@@ -64,36 +65,36 @@ const TableRow = React.forwardRef<
     {...props}
   />
 ))
-TableRow.displayName = "TableRow"
+TableSmallRow.displayName = "TableSmallRow"
 
-const TableHead = React.forwardRef<
+const TableSmallHead = React.forwardRef<
   HTMLTableCellElement,
   React.ThHTMLAttributes<HTMLTableCellElement>
 >(({ className, ...props }, ref) => (
   <th
     ref={ref}
     className={cn(
-      "h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
+      "h-9 pr-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
       className
     )}
     {...props}
   />
 ))
-TableHead.displayName = "TableHead"
+TableSmallHead.displayName = "TableSmallHead"
 
-const TableCell = React.forwardRef<
+const TableSmallCell = React.forwardRef<
   HTMLTableCellElement,
   React.TdHTMLAttributes<HTMLTableCellElement>
 >(({ className, ...props }, ref) => (
   <td
     ref={ref}
-    className={cn("py-2 2xl:py-3 pl-4 align-middle [&:has([role=checkbox])]:pr-0", className)}
+    className={cn("py-2 pr-4 align-middle [&:has([role=checkbox])]:pr-0", className)}
     {...props}
   />
 ))
-TableCell.displayName = "TableCell"
+TableSmallCell.displayName = "TableSmallCell"
 
-const TableCaption = React.forwardRef<
+const TableSmallCaption = React.forwardRef<
   HTMLTableCaptionElement,
   React.HTMLAttributes<HTMLTableCaptionElement>
 >(({ className, ...props }, ref) => (
@@ -103,15 +104,15 @@ const TableCaption = React.forwardRef<
     {...props}
   />
 ))
-TableCaption.displayName = "TableCaption"
+TableSmallCaption.displayName = "TableSmallCaption"
 
 export {
-  Table,
-  TableHeader,
-  TableBody,
-  TableFooter,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableCaption,
+  TableSmall,
+  TableSmallHeader,
+  TableSmallBody,
+  TableSmallFooter,
+  TableSmallHead,
+  TableSmallRow,
+  TableSmallCell,
+  TableSmallCaption,
 }
