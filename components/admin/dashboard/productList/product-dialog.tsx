@@ -105,17 +105,17 @@ export function ProductDialog({
       <DialogContent className="sm:max-w-[425px]">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleSubmit)}>
-            <DialogHeader>
-              <DialogTitle>
+            <DialogHeader className="mb-2">
+              <DialogTitle className="text-left">
                 {editingProduct ? "Editar producto" : "Crear producto"}
               </DialogTitle>
-              <DialogDescription>
+              <DialogDescription className="text-left">
                 {editingProduct
                   ? "Modifica los datos del producto."
                   : "Ingresá los datos de tu nuevo producto."}
               </DialogDescription>
             </DialogHeader>
-            <div className="grid gap-4 py-4">
+            <div className="grid gap-4 py-4 ">
               <FormField
                 control={form.control}
                 name="nombre"
@@ -167,7 +167,7 @@ export function ProductDialog({
                     <FormLabel>Precio de lista</FormLabel>
                     <FormControl>
                       <div className="flex items-center">
-                        <span className="w-12 mr-2 text-sm font-semibold">
+                        <span className="mr-2 text-sm font-semibold w-14">
                           ARS $
                         </span>
                         <Input
@@ -190,11 +190,12 @@ export function ProductDialog({
                     <FormLabel>Precio al público</FormLabel>
                     <FormControl>
                       <div className="flex items-center">
-                        <span className="w-12 mr-2 text-sm font-semibold">
+                        <span className="mr-2 text-sm font-semibold w-14">
                           ARS $
                         </span>
                         <Input
                           type="number"
+                          className="w-full"
                           placeholder="Ingresa el precio al público"
                           {...field}
                         />
@@ -205,7 +206,7 @@ export function ProductDialog({
                 )}
               />
             </div>
-            <DialogFooter>
+            <DialogFooter className="mt-4">
               <Button type="submit">
                 {editingProduct ? "Guardar cambios" : "Crear producto"}
               </Button>

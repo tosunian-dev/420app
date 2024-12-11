@@ -127,7 +127,7 @@ const ProductsPage = () => {
 
   return (
     <>
-      <div className="flex items-start justify-between mb-4 ">
+      <div className="flex items-start justify-between mb-4 md:mb-6 ">
         <div className="flex flex-col gap-2">
           <Breadcrumb>
             <BreadcrumbList>
@@ -148,7 +148,7 @@ const ProductsPage = () => {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          <h2 className="text-xl font-semibold md:text-xl 2xl:text-2xl">Todos los productos</h2>
+          <h2 className="text-2xl font-semibold md:text-2xl ">Todos los productos</h2>
         </div>
         <Button
           variant="default"

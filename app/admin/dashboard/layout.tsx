@@ -131,7 +131,7 @@ export default function DashboardLayout({
             </div>
 
 
-            <Separator style={{ margin: ' 0' }} className="" />
+            <Separator style={{ margin: 'auto', width:'90%' }} className="mx-auto" />
 
             <div className="flex flex-col flex-1 pt-2 pb-4 overflow-y-auto">
               <div className="flex-1 px-3 space-y-1 bg-white divide-y dark:bg-background">
@@ -239,10 +239,10 @@ export default function DashboardLayout({
         ></div>
         <div
           id="main-content"
-          className="relative w-full min-h-screen overflow-x-hidden overflow-y-hidden bg-white border-l-0 lg:border-l border-gray-200 dark:bg-background dark:border-border lg:ml-56"
+          className="relative w-full min-h-screen overflow-x-hidden overflow-y-hidden bg-white border-l-0 border-gray-200 lg:border-l dark:bg-background dark:border-border lg:ml-56"
         >
           <main>
-            <div className="p-5 sm:p-7 2xl:px-9 2xl:py-7">
+            <div className="p-5 sm:p-8 2xl:px-10 2xl:py-9">
               <div className="w-full min-h-[calc(100vh-230px)]">
                 <div className="bg-white dark:bg-background">
                   {children}

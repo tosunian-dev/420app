@@ -38,14 +38,14 @@ export function ProductDeleteDialog({
         <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>
+                    <DialogTitle className="text-left">
                         Eliminar producto
                     </DialogTitle>
-                    <DialogDescription>
+                    <DialogDescription className="text-left">
                         ¿Queres eliminar el producto {deletingProduct?.nombre}?
                     </DialogDescription>
                 </DialogHeader>
-                <DialogFooter>
+                <DialogFooter className="flex flex-col gap-3 mt-2 sm:gap-2 sm:flex-row">
                     <Button variant={'secondary'} onClick={() => onOpenChange(false)} type="submit">
                         Cancelar
                     </Button>

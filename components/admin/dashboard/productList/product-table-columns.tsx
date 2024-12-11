@@ -54,7 +54,7 @@ export const ProductTableColumns = ({
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Producto
-            <ArrowUpDown size={14} className="ml-2 " />
+            <ArrowUpDown size={14} className="hidden ml-2 md:block" />
           </span>
         );
       },
@@ -68,7 +68,7 @@ export const ProductTableColumns = ({
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Precio de lista
-            <ArrowUpDown size={14} className="ml-2 " />
+            <ArrowUpDown size={14} className="hidden ml-2 md:block" />
           </span>
         );
       },
@@ -92,7 +92,7 @@ export const ProductTableColumns = ({
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Precio al público
-            <ArrowUpDown size={14} className="ml-2 " />
+            <ArrowUpDown size={14} className="hidden ml-2 md:block " />
           </span>
         );
       },
@@ -114,7 +114,7 @@ export const ProductTableColumns = ({
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Categoría
-            <ArrowUpDown size={14} className="ml-2 " />
+            <ArrowUpDown size={14} className="hidden ml-2 md:block" />
           </span>
         );
       },
