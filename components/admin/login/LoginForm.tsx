@@ -65,43 +65,46 @@ const LoginForm = () => {
   }
   return (
     <>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nombre de usuario</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Ingresa tu usuario"
-                    type="text"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Contraseña</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Ingresa tu contraseña"
-                    type="password"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
+          <div className="space-y-4">
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Nombre de usuario</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Ingresa tu usuario"
+                      type="text"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Contraseña</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Ingresa tu contraseña"
+                      type="password"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
           <Button type="submit" className="w-full ">
             Iniciar sesión
@@ -111,7 +114,7 @@ const LoginForm = () => {
 
       {loading && (
         <>
-          <div className="absolute top-0 left-0 w-screen h-screen">
+          <div className="absolute top-0 left-0 w-screen h-screen overflow-hidden">
             <LoaderFullscreen />
           </div>
         </>
