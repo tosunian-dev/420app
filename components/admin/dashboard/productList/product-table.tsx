@@ -511,8 +511,8 @@ export function ProductTable({ data, onEdit, onDelete, onModifyPrices, onCopyPri
       >
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Modificar precios por porcentaje</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-left">Modificar precios por porcentaje</DialogTitle>
+            <DialogDescription className="text-left">
               Si queres aumentar el precio, seleccioná &quot;Aumentar
               precio&quot; o &quot;Bajar precio&quot; para bajar el precio.
               Luego ingresar el porcentaje a aplicar. El porcentaje se
