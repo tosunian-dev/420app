@@ -9,7 +9,7 @@ const Table = React.forwardRef<
   <div className="relative w-full overflow-auto">
     <table
       ref={ref}
-      className={cn("w-full caption-bottom 2xl:text-sm text-xs", className)}
+      className={cn("w-full caption-bottom 2xl:text-sm text-tiny", className)}
       {...props}
     />
   </div>
@@ -87,7 +87,7 @@ const TableCell = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <td
     ref={ref}
-    className={cn("py-2 2xl:py-3 pl-4 align-middle [&:has([role=checkbox])]:pr-0", className)}
+    className={cn("py-2 sm:py-1 2xl:py-3 pl-4 align-middle [&:has([role=checkbox])]:pr-0", className)}
     {...props}
   />
 ))

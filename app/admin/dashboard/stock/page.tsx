@@ -127,7 +127,7 @@ const ProductsPage = () => {
 
   return (
     <>
-      <div className="flex items-start justify-between mb-4 md:mb-6 ">
+      <div className="flex items-start justify-between mb-4 md:mb-3 2xl:mb-6 ">
         <div className="flex flex-col gap-2">
           <Breadcrumb>
             <BreadcrumbList>
