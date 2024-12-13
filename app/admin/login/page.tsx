@@ -19,18 +19,7 @@ const Login = () => {
           style={{ height: "calc(100vh - 70px)" }}
           className="flex flex-col items-center justify-center w-full dark"
         >
-          <Card className="flex flex-col justify-between gap-8 mx-5 bg-transparent pt-7 pl-7 pr-7 w-fit h-fit dark backdrop-blur-sm">
-            <div className="flex flex-col gap-2">
-              <span className="text-2xl font-semibold text-left ">
-                Iniciar sesión
-              </span>
-              <span className="text-sm font-normal text-left ">
-                ¡Bienvenido! Ingresá tu usuario y contraseña para acceder.
-              </span>
-
-            </div>
-            <LoginForm />
-          </Card>
+          <LoginForm />
         </div>
       </div >
     </>

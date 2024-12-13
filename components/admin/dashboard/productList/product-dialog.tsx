@@ -36,7 +36,7 @@ const formSchema = z.object({
   nombre: z.string().min(1, "El nombre es requerido"),
   categoria: z.string().min(1, "La categoría es requerida"),
   precioDeLista: z.string().min(1, "El precio de lista es requerido"),
-  precioAlPublico: z.string().min(1, "El precio al público es requerido"),
+  porcentajeGanancia: z.string().min(1, "El precio al público es requerido"),
   marca: z.string().optional(),
 });
 
@@ -53,13 +53,14 @@ export function ProductDialog({
   onSubmit,
   editingProduct,
 }: ProductDialogProps) {
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       nombre: "",
       categoria: "",
       precioDeLista: "",
-      precioAlPublico: "",
+      porcentajeGanancia: "",
       marca: "",
     },
   });
@@ -70,7 +71,7 @@ export function ProductDialog({
         nombre: editingProduct.nombre,
         categoria: editingProduct.categoria,
         precioDeLista: editingProduct.precioDeLista.toString(),
-        precioAlPublico: editingProduct.precioAlPublico.toString(),
+        porcentajeGanancia: editingProduct.porcentajeGanancia?.toString(),
         marca: editingProduct.marca || "",
       });
     } else {
@@ -78,20 +79,18 @@ export function ProductDialog({
         nombre: "",
         categoria: "",
         precioDeLista: "",
-        precioAlPublico: "",
+        porcentajeGanancia: "",
         marca: "",
       });
     }
   }, [editingProduct, form]);
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log('valores', values);
-
     await onSubmit(
       {
         ...values,
         precioDeLista: parseFloat(values.precioDeLista),
-        precioAlPublico: parseFloat(values.precioAlPublico),
+        porcentajeGanancia: parseFloat(values.porcentajeGanancia),
         _id: editingProduct?._id,
       },
       !!editingProduct,
@@ -184,19 +183,19 @@ export function ProductDialog({
               />
               <FormField
                 control={form.control}
-                name="precioAlPublico"
+                name="porcentajeGanancia"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Precio al público</FormLabel>
+                    <FormLabel>Porcentaje de ganancia</FormLabel>
                     <FormControl>
                       <div className="flex items-center">
-                        <span className="mr-2 text-sm font-semibold w-14">
-                          ARS $
+                        <span className="mr-2 text-sm font-semibold w-fit">
+                          %
                         </span>
                         <Input
                           type="number"
                           className="w-full"
-                          placeholder="Ingresa el precio al público"
+                          placeholder="Ingresa el porcentaje de ganancia"
                           {...field}
                         />
                       </div>

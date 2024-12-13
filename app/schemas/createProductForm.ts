@@ -10,7 +10,7 @@ export const formSchema = z.object({
   precioAlPublico: z.string().min(1, {
     message: "Ingresa un precio al público.",
   }),
-  precioDeLista: z.string().min(1, {
-    message: "Ingresa un precio de lista.",
+  porcentajeGanancia: z.string().min(1, {
+    message: "Ingresa un porcentaje de ganancia.",
   }),
 });

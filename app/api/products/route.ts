@@ -18,8 +18,7 @@ export async function POST(request: NextRequest) {
   await connectDB();
   try {
     const product = await request.json();
-    product.precioAlPublico = Number(product.precioAlPublico);
-    product.precioDeLista = Number(product.precioDeLista);
+    product.precioAlPublico = Number(product.precioDeLista) * (1 + Number(product.porcentajeGanancia) / 100);
     const newProduct = await ProductModel.create(product);
     return NextResponse.json(newProduct);
   } catch (error) {

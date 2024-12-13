@@ -19,6 +19,8 @@ import React, { useState } from "react";
 import LoaderFullscreen from "../LoaderFullscreen";
 import { useToast } from "@/hooks/use-toast";
 import { Toaster } from "@/components/ui/toaster";
+import { Card } from "@/components/ui/card";
+import { Separator } from "@radix-ui/react-dropdown-menu";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -65,60 +67,76 @@ const LoginForm = () => {
   }
   return (
     <>
-
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
-          <div className="space-y-4">
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Nombre de usuario</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Ingresa tu usuario"
-                      type="text"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Contraseña</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Ingresa tu contraseña"
-                      type="password"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-
-          <Button type="submit" className="w-full ">
-            Iniciar sesión
-          </Button>
-        </form>
-      </Form>
-
       {loading && (
         <>
-          <div className="absolute top-0 left-0 w-screen h-screen overflow-hidden">
+          <div style={{ zIndex: '999999999999999999999' }} className="absolute top-0 left-0 w-screen h-screen overflow-hidden">
             <LoaderFullscreen />
           </div>
         </>
       )}
+      {!loading && (
+        <Card className="flex flex-col justify-between gap-8 mx-5 bg-transparent p-7 w-fit h-fit dark backdrop-blur-sm">
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-1">
+              <span className="text-3xl font-semibold text-left ">
+                Iniciar sesión
+              </span>
+              <Separator className="w-7" style={{backgroundColor:'#7f00b9', height:'1px'}} />
+            </div>
+            <span className="text-sm font-normal text-left ">
+              Ingresá tu usuario y contraseña para acceder.
+            </span>
+
+          </div>
+
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
+              <div className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="username"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Nombre de usuario</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Ingresa tu usuario"
+                          type="text"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Contraseña</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Ingresa tu contraseña"
+                          type="password"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <Button type="submit" className="w-full ">
+                Iniciar sesión
+              </Button>
+            </form>
+          </Form>
+        </Card>
+      )}
+
       <Toaster />
     </>
   );

@@ -8,6 +8,7 @@ export async function PUT(
 ) {
   await connectDB();
   const product = await request.json();
+  product.precioAlPublico = Number(product.precioDeLista) * (1 + Number(product.porcentajeGanancia) / 100);
   try {
     const editedProduct = await ProductModel.findByIdAndUpdate(
       params.id,
@@ -25,8 +26,6 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   await connectDB();
-  console.log(params.id);
-
   try {
     await ProductModel.findByIdAndDelete(params.id);
     return NextResponse.json("PRODUCT_DELETED");

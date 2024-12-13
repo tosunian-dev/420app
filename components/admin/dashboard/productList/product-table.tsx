@@ -167,11 +167,11 @@ export function ProductTable({ data, onEdit, onDelete, onModifyPrices, onCopyPri
 
       if (addOrSub === '+') {
         nuevoPrecioDeLista = product.precioDeLista * (1 + Number(percent) / 100)
-        nuevoPrecioAlPublico = product.precioAlPublico * (1 + Number(percent) / 100)
+        nuevoPrecioAlPublico = nuevoPrecioDeLista * (1 + Number(product.porcentajeGanancia) / 100)
       }
       if (addOrSub === '-') {
         nuevoPrecioDeLista = product.precioDeLista * (1 - Number(percent) / 100)
-        nuevoPrecioAlPublico = product.precioAlPublico * (1 - Number(percent) / 100)
+        nuevoPrecioAlPublico = nuevoPrecioDeLista * (1 + Number(product.porcentajeGanancia) / 100)
       }
       product.precioAlPublico = nuevoPrecioAlPublico
       product.precioDeLista = nuevoPrecioDeLista
@@ -241,8 +241,6 @@ export function ProductTable({ data, onEdit, onDelete, onModifyPrices, onCopyPri
                   .getAllColumns()
                   .filter((column) => column.getCanHide())
                   .map((column) => {
-                    console.log('column', column);
-
                     return (
                       <DropdownMenuCheckboxItem
                         key={column.id}
