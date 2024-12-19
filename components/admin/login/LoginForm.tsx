@@ -77,7 +77,7 @@ const LoginForm = () => {
       {!loading && (
         <Card className="flex flex-col justify-between gap-8 mx-5 bg-transparent p-7 w-fit h-fit dark backdrop-blur-sm">
           <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col ">
               <span className="text-3xl font-semibold text-left ">
                 Iniciar sesión
               </span>

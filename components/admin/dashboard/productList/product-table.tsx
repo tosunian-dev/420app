@@ -310,37 +310,7 @@ export function ProductTable({ data, onEdit, onDelete, onModifyPrices, onCopyPri
         </div>
 
         {/* desktop chart footer  */}
-        <div className="flex-col items-center justify-end hidden w-full gap-8 py-4 mx-auto md:flex md:flex-row sm:justify-between">
-          <div className="flex-1 text-sm text-muted-foreground unselectable">
-            {table.getSelectedRowModel().rows.length} de{" "}
-            {data.length} productos seleccionados.
-          </div>
-          {/* selector cantidad de productos por pagina */}
-          <div className="flex flex-row items-center gap-2 text-sm">
-            <span className="text-sm unselectable">Productos por página</span>
-            <Select value={table.getState().pagination.pageSize.toString()}
-              onValueChange={(value) => {
-                table.setPageSize(Number(value));
-              }}>
-              <SelectTrigger className="w-16 py-1 pl-3 pr-2 text-sm h-9">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Cantidad</SelectLabel>
-                  <SelectItem value="5">5</SelectItem>
-                  <SelectItem value="10">10</SelectItem>
-                  <SelectItem value="15">15</SelectItem>
-                  <SelectItem value="20">20</SelectItem>
-                  <SelectItem value="30">30</SelectItem>
-                  <SelectItem value="40">40</SelectItem>
-                  <SelectItem value="50">50</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-          {/* selector cantidad de productos por pagina */}
-
+        <div className="flex-col items-center justify-end hidden w-full gap-8 py-4 mx-auto md:flex md:flex-row sm:justify-start">
 
           <div className="flex items-center gap-4 w-fit">
             <Button
@@ -365,6 +335,37 @@ export function ProductTable({ data, onEdit, onDelete, onModifyPrices, onCopyPri
               <IoIosArrowForward size={14} />
             </Button>
           </div>
+
+          <div className="text-sm w-fit text-muted-foreground unselectable">
+            {table.getSelectedRowModel().rows.length} de{" "}
+            {data.length} productos seleccionados.
+          </div>
+          {/* selector cantidad de productos por pagina */}
+          <div className="flex flex-row items-center gap-2  text-sm">
+            <span className="text-sm unselectable">Mostrar</span>
+            <Select value={table.getState().pagination.pageSize.toString()}
+              onValueChange={(value) => {
+                table.setPageSize(Number(value));
+              }}>
+              <SelectTrigger className="w-16 py-1 pl-3 pr-2 text-sm h-9">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Cantidad</SelectLabel>
+                  <SelectItem value="5">5</SelectItem>
+                  <SelectItem value="10">10</SelectItem>
+                  <SelectItem value="15">15</SelectItem>
+                  <SelectItem value="20">20</SelectItem>
+                  <SelectItem value="30">30</SelectItem>
+                  <SelectItem value="40">40</SelectItem>
+                  <SelectItem value="50">50</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+          {/* selector cantidad de productos por pagina */}
+
         </div>
         {/* desktop chart footer  */}
 

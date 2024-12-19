@@ -137,7 +137,7 @@ export const ProductTableColumns = ({
               <DropdownMenuItem
                 onClick={() => {
                   onCopyPrice();
-                  navigator.clipboard.writeText(product.precioAlPublico.toString())
+                  navigator.clipboard.writeText(Math.round(product.precioAlPublico).toString())
                 }
                 }
               >
